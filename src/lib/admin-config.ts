@@ -1,0 +1,410 @@
+export type FieldType =
+  | "text"
+  | "textarea"
+  | "number"
+  | "url"
+  | "image"
+  | "datetime"
+  | "color"
+  | "switch";
+
+export type Field = {
+  name: string;
+  label: string;
+  type?: FieldType;
+  help?: string;
+  full?: boolean;
+};
+
+export type SectionConfig = {
+  key: string;
+  label: string;
+  icon: string;
+  group: string;
+  kind: "singleton" | "collection" | "enrollments";
+  table: string;
+  /** collection ordering column */
+  order?: string;
+  fields: Field[];
+  titleField?: string;
+  subtitleField?: string;
+  imageField?: string;
+  description?: string;
+};
+
+export const sections: SectionConfig[] = [
+  {
+    key: "hero",
+    label: "Hero Manager",
+    icon: "Sparkles",
+    group: "Content",
+    kind: "singleton",
+    table: "hero_section",
+    description: "The first thing visitors see on the homepage.",
+    fields: [
+      { name: "headline", label: "Headline", full: true },
+      { name: "subheadline", label: "Subheadline", type: "textarea", full: true },
+      { name: "cta_primary_label", label: "Primary button label" },
+      { name: "cta_primary_url", label: "Primary button URL", type: "url" },
+      { name: "cta_secondary_label", label: "Secondary button label" },
+      { name: "cta_secondary_url", label: "Secondary button URL", type: "url" },
+      { name: "background_url", label: "Background image URL", type: "image", full: true },
+    ],
+  },
+  {
+    key: "about",
+    label: "About Manager",
+    icon: "User",
+    group: "Content",
+    kind: "singleton",
+    table: "about_section",
+    description: "Biography block shown on the homepage and About page.",
+    fields: [
+      { name: "heading", label: "Heading", full: true },
+      { name: "body", label: "Body", type: "textarea", full: true },
+      { name: "image_url", label: "Image URL", type: "image", full: true },
+    ],
+  },
+  {
+    key: "profile",
+    label: "Profile",
+    icon: "IdCard",
+    group: "Content",
+    kind: "singleton",
+    table: "profile",
+    description: "Core identity used across the site.",
+    fields: [
+      { name: "full_name", label: "Full name" },
+      { name: "title", label: "Title" },
+      { name: "tagline", label: "Tagline", type: "textarea", full: true },
+      { name: "bio", label: "Biography", type: "textarea", full: true },
+      { name: "years_experience", label: "Years of experience", type: "number" },
+      { name: "location", label: "Location" },
+      { name: "email", label: "Email" },
+      { name: "phone", label: "Phone" },
+      { name: "whatsapp", label: "WhatsApp" },
+      { name: "avatar_url", label: "Portrait URL", type: "image", full: true },
+    ],
+  },
+  {
+    key: "qualifications",
+    label: "Qualifications",
+    icon: "GraduationCap",
+    group: "Credentials",
+    kind: "collection",
+    table: "qualifications",
+    titleField: "degree",
+    subtitleField: "institution",
+    fields: [
+      { name: "degree", label: "Degree" },
+      { name: "institution", label: "Institution" },
+      { name: "year", label: "Year" },
+      { name: "order_index", label: "Order", type: "number" },
+      { name: "description", label: "Description", type: "textarea", full: true },
+    ],
+  },
+  {
+    key: "experience",
+    label: "Experience",
+    icon: "Briefcase",
+    group: "Credentials",
+    kind: "collection",
+    table: "experiences",
+    titleField: "role",
+    subtitleField: "organization",
+    fields: [
+      { name: "role", label: "Role" },
+      { name: "organization", label: "Organization" },
+      { name: "start_year", label: "Start year" },
+      { name: "end_year", label: "End year" },
+      { name: "order_index", label: "Order", type: "number" },
+      { name: "description", label: "Description", type: "textarea", full: true },
+    ],
+  },
+  {
+    key: "achievements",
+    label: "Achievements",
+    icon: "Trophy",
+    group: "Credentials",
+    kind: "collection",
+    table: "achievements",
+    titleField: "title",
+    subtitleField: "year",
+    fields: [
+      { name: "title", label: "Title" },
+      { name: "year", label: "Year" },
+      { name: "icon", label: "Icon name" },
+      { name: "order_index", label: "Order", type: "number" },
+      { name: "description", label: "Description", type: "textarea", full: true },
+    ],
+  },
+  {
+    key: "subjects",
+    label: "Subjects",
+    icon: "BookOpen",
+    group: "Teaching",
+    kind: "collection",
+    table: "subjects",
+    titleField: "name",
+    subtitleField: "level",
+    fields: [
+      { name: "name", label: "Subject name" },
+      { name: "level", label: "Level" },
+      { name: "icon", label: "Icon name" },
+      { name: "order_index", label: "Order", type: "number" },
+      { name: "description", label: "Description", type: "textarea", full: true },
+    ],
+  },
+  {
+    key: "services",
+    label: "Teaching Services",
+    icon: "Presentation",
+    group: "Teaching",
+    kind: "collection",
+    table: "teaching_services",
+    titleField: "title",
+    subtitleField: "platform",
+    fields: [
+      { name: "title", label: "Service title" },
+      { name: "platform", label: "Platform" },
+      { name: "icon", label: "Icon name" },
+      { name: "order_index", label: "Order", type: "number" },
+      { name: "description", label: "Description", type: "textarea", full: true },
+    ],
+  },
+  {
+    key: "courses",
+    label: "Featured Courses",
+    icon: "Layers",
+    group: "Teaching",
+    kind: "collection",
+    table: "featured_courses",
+    titleField: "title",
+    subtitleField: "level",
+    imageField: "image_url",
+    fields: [
+      { name: "title", label: "Course title" },
+      { name: "level", label: "Level" },
+      { name: "duration", label: "Duration" },
+      { name: "schedule", label: "Schedule" },
+      { name: "price", label: "Price" },
+      { name: "order_index", label: "Order", type: "number" },
+      { name: "summary", label: "Summary", type: "textarea", full: true },
+      { name: "image_url", label: "Image URL", type: "image", full: true },
+    ],
+  },
+  {
+    key: "results",
+    label: "Student Results",
+    icon: "Award",
+    group: "Proof",
+    kind: "collection",
+    table: "student_results",
+    titleField: "student_name",
+    subtitleField: "grade",
+    imageField: "photo_url",
+    fields: [
+      { name: "student_name", label: "Student name" },
+      { name: "exam", label: "Exam" },
+      { name: "grade", label: "Grade" },
+      { name: "year", label: "Year" },
+      { name: "order_index", label: "Order", type: "number" },
+      { name: "note", label: "Note", type: "textarea", full: true },
+      { name: "photo_url", label: "Photo URL", type: "image", full: true },
+    ],
+  },
+  {
+    key: "testimonials",
+    label: "Testimonials",
+    icon: "Quote",
+    group: "Proof",
+    kind: "collection",
+    table: "testimonials",
+    titleField: "student_name",
+    subtitleField: "student_title",
+    imageField: "avatar_url",
+    fields: [
+      { name: "student_name", label: "Name" },
+      { name: "student_title", label: "Role / relation (e.g. Parent)" },
+      { name: "rating", label: "Rating (1-5)", type: "number" },
+      { name: "order_index", label: "Order", type: "number" },
+      { name: "is_featured", label: "Featured", type: "switch" },
+      { name: "quote", label: "Quote", type: "textarea", full: true },
+      { name: "avatar_url", label: "Avatar URL", type: "image", full: true },
+    ],
+  },
+  {
+    key: "gallery",
+    label: "Gallery Manager",
+    icon: "Images",
+    group: "Proof",
+    kind: "collection",
+    table: "gallery",
+    titleField: "title",
+    subtitleField: "category",
+    imageField: "image_url",
+    description: "Store image URLs, set a category and mark featured images.",
+    fields: [
+      { name: "title", label: "Title" },
+      { name: "category", label: "Category (Teaching, Events, Certificates, Whiteboard, Online Classes)" },
+      { name: "order_index", label: "Order", type: "number" },
+      { name: "is_featured", label: "Featured image", type: "switch" },
+      { name: "caption", label: "Caption", type: "textarea", full: true },
+      { name: "image_url", label: "Image URL", type: "image", full: true },
+    ],
+  },
+  {
+    key: "announcements",
+    label: "Announcements",
+    icon: "Megaphone",
+    group: "Engagement",
+    kind: "collection",
+    table: "announcements",
+    order: "created_at",
+    titleField: "title",
+    subtitleField: "link_url",
+    description: "Schedule publish and expiry dates, and enable or disable each notice.",
+    fields: [
+      { name: "title", label: "Title" },
+      { name: "link_url", label: "Link URL", type: "url" },
+      { name: "starts_at", label: "Publish date", type: "datetime" },
+      { name: "ends_at", label: "Expiry date", type: "datetime" },
+      { name: "body", label: "Body", type: "textarea", full: true },
+    ],
+  },
+  {
+    key: "popups",
+    label: "Popup Notifications",
+    icon: "BellRing",
+    group: "Engagement",
+    kind: "collection",
+    table: "popup_notifications",
+    order: "priority",
+    titleField: "title",
+    subtitleField: "cta_label",
+    imageField: "image_url",
+    description: "Timer, CTA button, auto-expiry and priority for homepage popups.",
+    fields: [
+      { name: "title", label: "Title" },
+      { name: "cta_label", label: "CTA button label" },
+      { name: "cta_url", label: "CTA button URL", type: "url" },
+      { name: "delay_seconds", label: "Popup timer (seconds)", type: "number" },
+      { name: "priority", label: "Priority (higher shows first)", type: "number" },
+      { name: "starts_at", label: "Start date", type: "datetime" },
+      { name: "ends_at", label: "Auto-expire date", type: "datetime" },
+      { name: "is_active", label: "Active", type: "switch" },
+      { name: "message", label: "Message", type: "textarea", full: true },
+      { name: "image_url", label: "Image URL", type: "image", full: true },
+    ],
+  },
+  {
+    key: "countdown",
+    label: "Exam Countdown",
+    icon: "Timer",
+    group: "Engagement",
+    kind: "collection",
+    table: "exam_countdowns",
+    titleField: "exam_name",
+    subtitleField: "exam_date",
+    fields: [
+      { name: "exam_name", label: "Exam name" },
+      { name: "exam_date", label: "Exam date", type: "datetime" },
+      { name: "order_index", label: "Order", type: "number" },
+      { name: "description", label: "Description", type: "textarea", full: true },
+    ],
+  },
+  {
+    key: "faqs",
+    label: "FAQs",
+    icon: "HelpCircle",
+    group: "Engagement",
+    kind: "collection",
+    table: "faqs",
+    titleField: "question",
+    fields: [
+      { name: "question", label: "Question", full: true },
+      { name: "order_index", label: "Order", type: "number" },
+      { name: "answer", label: "Answer", type: "textarea", full: true },
+    ],
+  },
+  {
+    key: "contact",
+    label: "Contact Information",
+    icon: "Phone",
+    group: "Settings",
+    kind: "singleton",
+    table: "contact_info",
+    fields: [
+      { name: "email", label: "Email" },
+      { name: "phone", label: "Phone" },
+      { name: "whatsapp", label: "WhatsApp number" },
+      { name: "timezone", label: "Timezone" },
+      { name: "hours", label: "Working hours" },
+      { name: "address", label: "Address", type: "textarea", full: true },
+    ],
+  },
+  {
+    key: "social",
+    label: "Social Links",
+    icon: "Share2",
+    group: "Settings",
+    kind: "collection",
+    table: "social_links",
+    titleField: "platform",
+    subtitleField: "url",
+    fields: [
+      { name: "platform", label: "Platform" },
+      { name: "url", label: "URL", type: "url" },
+      { name: "icon", label: "Icon name" },
+      { name: "order_index", label: "Order", type: "number" },
+    ],
+  },
+  {
+    key: "seo",
+    label: "SEO Settings",
+    icon: "Search",
+    group: "Settings",
+    kind: "singleton",
+    table: "site_settings",
+    description: "Search engine title, description, keywords, share image and icons.",
+    fields: [
+      { name: "site_title", label: "Meta title", full: true },
+      { name: "site_description", label: "Meta description", type: "textarea", full: true },
+      { name: "seo_keywords", label: "Keywords (comma separated)", type: "textarea", full: true },
+      { name: "og_image_url", label: "Open Graph image URL", type: "image", full: true },
+      { name: "logo_url", label: "Logo URL", type: "image", full: true },
+      { name: "favicon_url", label: "Favicon URL", type: "image", full: true },
+    ],
+  },
+  {
+    key: "settings",
+    label: "General Settings",
+    icon: "Settings",
+    group: "Settings",
+    kind: "singleton",
+    table: "site_settings",
+    description: "Website name, brand colours, footer text and analytics.",
+    fields: [
+      { name: "site_title", label: "Website name", full: true },
+      { name: "brand_primary", label: "Primary brand colour", type: "color" },
+      { name: "brand_accent", label: "Accent brand colour", type: "color" },
+      { name: "theme_mode", label: "Default theme (light / dark / system)" },
+      { name: "analytics_id", label: "Analytics ID (e.g. G-XXXXXXX)" },
+      { name: "maintenance_mode", label: "Maintenance mode", type: "switch" },
+      { name: "footer_text", label: "Footer text", type: "textarea", full: true },
+    ],
+  },
+  {
+    key: "enrollments",
+    label: "Enrollment Requests",
+    icon: "Inbox",
+    group: "Engagement",
+    kind: "enrollments",
+    table: "enrollment_requests",
+    fields: [],
+  },
+];
+
+export const sectionByKey = (key: string) => sections.find((s) => s.key === key);
+
+export const groups = ["Content", "Credentials", "Teaching", "Proof", "Engagement", "Settings"];

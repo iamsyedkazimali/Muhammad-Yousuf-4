@@ -1,0 +1,18 @@
+CREATE INDEX IF NOT EXISTS idx_subjects_pub_order ON public.subjects (is_published, order_index);
+CREATE INDEX IF NOT EXISTS idx_qualifications_pub_order ON public.qualifications (is_published, order_index);
+CREATE INDEX IF NOT EXISTS idx_experiences_pub_order ON public.experiences (is_published, order_index);
+CREATE INDEX IF NOT EXISTS idx_teaching_services_pub_order ON public.teaching_services (is_published, order_index);
+CREATE INDEX IF NOT EXISTS idx_featured_courses_pub_order ON public.featured_courses (is_published, order_index);
+CREATE INDEX IF NOT EXISTS idx_exam_countdowns_pub_order ON public.exam_countdowns (is_published, order_index);
+CREATE INDEX IF NOT EXISTS idx_gallery_pub_order ON public.gallery (is_published, order_index);
+CREATE INDEX IF NOT EXISTS idx_testimonials_pub_order ON public.testimonials (is_published, order_index);
+CREATE INDEX IF NOT EXISTS idx_student_results_pub_order ON public.student_results (is_published, order_index);
+CREATE INDEX IF NOT EXISTS idx_achievements_pub_order ON public.achievements (is_published, order_index);
+CREATE INDEX IF NOT EXISTS idx_faqs_pub_order ON public.faqs (is_published, order_index);
+CREATE INDEX IF NOT EXISTS idx_social_links_pub_order ON public.social_links (is_published, order_index);
+CREATE INDEX IF NOT EXISTS idx_announcements_pub_created ON public.announcements (is_published, created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_announcements_window ON public.announcements (starts_at, ends_at);
+CREATE INDEX IF NOT EXISTS idx_popups_active ON public.popup_notifications (is_published, is_active, priority DESC);
+CREATE INDEX IF NOT EXISTS idx_enrollment_requests_created ON public.enrollment_requests (created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_enrollment_requests_type_status ON public.enrollment_requests (request_type, status);
+CREATE INDEX IF NOT EXISTS idx_user_roles_user ON public.user_roles (user_id);
